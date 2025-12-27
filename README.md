@@ -13,7 +13,7 @@ A modern, client-side WordPress password hash generator with multiple useful too
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://yourusername.github.io/wp-password-tool/)
+[View Live Demo](https://amartadey.github.io/wp-password/)
 
 ## 📦 Installation
 
@@ -114,3 +114,4 @@ This tool is provided as-is for educational and development purposes. Always bac
 ---
 
 Made with ❤️ for WordPress Developers
+
