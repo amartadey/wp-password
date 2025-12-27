@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Password Hash Generator - WGH Tools</title>
+    <meta name="description"
+        content="Generate WordPress password hashes, SQL queries, and emergency reset scripts. Free online tool for WordPress developers.">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="iconify" data-icon="mdi:wordpress"></span>
+                <span>WP Password Tools</span>
+            </div>
+            <nav class="nav">
+                <a href="#generator" class="nav-link active">
+                    <span class="iconify" data-icon="mdi:key-variant"></span>
+                    Generator
+                </a>
+                <a href="#sql" class="nav-link">
+                    <span class="iconify" data-icon="mdi:database"></span>
+                    SQL Query
+                </a>
+                <a href="#script" class="nav-link">
+                    <span class="iconify" data-icon="mdi:code-braces"></span>
+                    PHP Script
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Light/Dark Mode">
+                    <span class="iconify" data-icon="mdi:weather-sunny"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">WordPress Password Hash Generator</h1>
+            <p class="hero-subtitle">Generate secure WordPress password hashes, SQL queries, and emergency reset scripts
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+
+            <!-- Password Generator Section -->
+            <section id="generator" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="iconify card-icon" data-icon="mdi:key-variant"></span>
+                        <h2>Password Hash Generator</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="password">
+                                <span class="iconify" data-icon="mdi:lock"></span>
+                                Enter Password
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="password" id="password" placeholder="Enter your password" class="input">
+                                <button class="btn-icon" id="togglePassword" title="Show/Hide Password">
+                                    <span class="iconify" data-icon="mdi:eye"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="result-section" id="hashResult" style="display: none;">
+                            <div class="form-group">
+                                <label>
+                                    <span class="iconify" data-icon="mdi:shield-lock"></span>
+                                    WordPress Password Hash
+                                </label>
+                                <div class="code-block">
+                                    <code id="hashOutput"></code>
+                                    <button class="btn-copy" data-target="hashOutput">
+                                        <span class="iconify" data-icon="mdi:content-copy"></span>
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <span class="iconify" data-icon="mdi:information"></span>
+                                <div>
+                                    <strong>How to use:</strong>
+                                    <ol>
+                                        <li>Copy the hash above</li>
+                                        <li>Go to phpMyAdmin → wp_users table</li>
+                                        <li>Edit the user row</li>
+                                        <li>Paste the hash in <code>user_pass</code> field</li>
+                                        <li>Set Function to <strong>blank</strong> (no function)</li>
+                                        <li>Click Save</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password Strength</label>
+                            <div class="strength-meter">
+                                <div class="strength-bar" id="strengthBar"></div>
+                            </div>
+                            <p class="strength-text" id="strengthText">Enter a password to check strength</p>
+                        </div>
+
+                        <button class="btn btn-primary" id="generateHash">
+                            <span class="iconify" data-icon="mdi:auto-fix"></span>
+                            Generate Hash
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SQL Query Section -->
+            <section id="sql" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="iconify card-icon" data-icon="mdi:database"></span>
+                        <h2>SQL Query Generator</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sqlUsername">
+                                    <span class="iconify" data-icon="mdi:account"></span>
+                                    Username
+                                </label>
+                                <input type="text" id="sqlUsername" placeholder="admin" class="input">
+                            </div>
+                            <div class="form-group">
+                                <label for="sqlPassword">
+                                    <span class="iconify" data-icon="mdi:lock"></span>
+                                    New Password
+                                </label>
+                                <input type="password" id="sqlPassword" placeholder="Enter password" class="input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tablePrefix">
+                                <span class="iconify" data-icon="mdi:table"></span>
+                                Table Prefix
+                            </label>
+                            <input type="text" id="tablePrefix" placeholder="wp_" value="wp_" class="input">
+                        </div>
+
+                        <button class="btn btn-primary" id="generateSQL">
+                            <span class="iconify" data-icon="mdi:database-edit"></span>
+                            Generate SQL Query
+                        </button>
+
+                        <div class="result-section" id="sqlResult" style="display: none;">
+                            <div class="form-group">
+                                <label>
+                                    <span class="iconify" data-icon="mdi:code-tags"></span>
+                                    SQL Query
+                                </label>
+                                <div class="code-block">
+                                    <pre><code id="sqlOutput"></code></pre>
+                                    <button class="btn-copy" data-target="sqlOutput">
+                                        <span class="iconify" data-icon="mdi:content-copy"></span>
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-warning">
+                                <span class="iconify" data-icon="mdi:alert"></span>
+                                <div>
+                                    <strong>Warning:</strong> This query will update the password directly in the
+                                    database. Make sure to backup your database before running this query.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHP Script Section -->
+            <section id="script" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="iconify card-icon" data-icon="mdi:code-braces"></span>
+                        <h2>Emergency Reset Script</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="scriptUserId">
+                                    <span class="iconify" data-icon="mdi:account-key"></span>
+                                    User ID
+                                </label>
+                                <input type="number" id="scriptUserId" placeholder="1" value="1" class="input">
+                            </div>
+                            <div class="form-group">
+                                <label for="scriptPassword">
+                                    <span class="iconify" data-icon="mdi:lock"></span>
+                                    New Password
+                                </label>
+                                <input type="password" id="scriptPassword" placeholder="Enter password" class="input">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="generateScript">
+                            <span class="iconify" data-icon="mdi:file-code"></span>
+                            Generate PHP Script
+                        </button>
+
+                        <div class="result-section" id="scriptResult" style="display: none;">
+                            <div class="form-group">
+                                <label>
+                                    <span class="iconify" data-icon="mdi:language-php"></span>
+                                    PHP Reset Script
+                                </label>
+                                <div class="code-block">
+                                    <pre><code id="scriptOutput"></code></pre>
+                                    <button class="btn-copy" data-target="scriptOutput">
+                                        <span class="iconify" data-icon="mdi:content-copy"></span>
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-danger">
+                                <span class="iconify" data-icon="mdi:shield-alert"></span>
+                                <div>
+                                    <strong>Security Warning:</strong>
+                                    <ol>
+                                        <li>Save this code as <code>reset-password.php</code> in your WordPress root
+                                            directory</li>
+                                        <li>Visit the file once in your browser</li>
+                                        <li><strong>DELETE THE FILE IMMEDIATELY</strong> after use</li>
+                                        <li>Never leave this file on your server!</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password Generator Tool -->
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="iconify card-icon" data-icon="mdi:shield-key"></span>
+                        <h2>Secure Password Generator</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Password Length: <span id="lengthValue">16</span></label>
+                            <input type="range" id="passwordLength" min="8" max="64" value="16" class="slider">
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeUppercase" checked>
+                                <span>Uppercase (A-Z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeLowercase" checked>
+                                <span>Lowercase (a-z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeNumbers" checked>
+                                <span>Numbers (0-9)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeSymbols" checked>
+                                <span>Symbols (!@#$%)</span>
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary" id="generatePassword">
+                            <span class="iconify" data-icon="mdi:refresh"></span>
+                            Generate Secure Password
+                        </button>
+
+                        <div class="result-section" id="passwordResult" style="display: none;">
+                            <div class="form-group">
+                                <label>Generated Password</label>
+                                <div class="code-block">
+                                    <code id="generatedPassword"></code>
+                                    <button class="btn-copy" data-target="generatedPassword">
+                                        <span class="iconify" data-icon="mdi:content-copy"></span>
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy;
+                <script>document.write(new Date().getFullYear())</script> WGH Tools. Made with <span class="iconify"
+                    data-icon="mdi:heart"></span> for WordPress Developers
+            </p>
+            <div class="footer-links">
+                <a href="https://webgraphicshub.com" target="_blank">
+                    <span class="iconify" data-icon="mdi:web"></span>
+                    Web Graphics Hub
+                </a>
+                <!-- <a href="https://github.com" target="_blank">
+                    <span class="iconify" data-icon="mdi:github"></span>
+                    GitHub
+                </a> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="iconify" data-icon="mdi:check-circle"></span>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- bcrypt.js for WordPress-compatible password hashing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
