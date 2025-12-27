@@ -15,28 +15,6 @@ A modern, client-side WordPress password hash generator with multiple useful too
 
 [View Live Demo](https://amartadey.github.io/wp-password/)
 
-## 📦 Installation
-
-### GitHub Pages Deployment
-
-1. Fork this repository
-2. Go to Settings → Pages
-3. Select `main` branch as source
-4. Your site will be published at `https://yourusername.github.io/wp-password-tool/`
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/wp-password-tool.git
-
-# Navigate to directory
-cd wp-password-tool
-
-# Open in browser
-open index.html
-```
-
 ## 🛠️ Technologies Used
 
 - **HTML5** - Semantic markup
@@ -99,7 +77,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **WebGraphicsHub**
 - Website: [webgraphicshub.com](https://webgraphicshub.com)
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@amartadey](https://github.com/yourusername)
 
 ## 🙏 Acknowledgments
 
@@ -114,4 +92,5 @@ This tool is provided as-is for educational and development purposes. Always bac
 ---
 
 Made with ❤️ for WordPress Developers
+
 
